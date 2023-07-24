@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="rps.png">
+<link rel="icon" type="image/png" sizes="32x32" href="rps.png">
+<link rel="icon" type="image/png" sizes="16x16" href="rps.png">
+<link rel="manifest" href="/site.webmanifest">
+    <title>Rock Paper Scissors</title>
+</head>
+<style>
+    *{
+        box-sizing: border-box;
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        font-weight : bold ; 
+    }
+    body{
+        display : flex ;
+        width: 100%;
+        height :100Vh ;
+        justify-content: center;
+        flex-direction: row;
+        align-items : center ;
+        background: linear-gradient(45deg , yellow , white );
+    }
+    #opponent_choice , #your_choice {
+        width : 150px ;
+        height :  150px;
+        
+        margin : 15px ;
+        border-radius: 10px;
+        background: transparent;
+        box-shadow: -5px 5px 10px rgba(174, 171, 171, 0.5);
+
+
+    }
+    #choices{
+        width : 240px ;
+        height : 80px ;
+        background: blue;
+        margin : 5px ;
+        display : flex ;
+        flex-direction : row ; 
+    }
+    .your_choices{
+        width : 80px ;
+        height : 80px ;
+    }
+    .dis{
+        display : flex ;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #choi{
+        display: flex;
+        flex-direction: column;
+        margin:15px ;
+    }
+    h2{
+        color : grey white ;
+    }
+</style>
+<body>
+     <div class="class">
+        <h3>To start the game , select your choice</h3>
+        <h3>To end the game , click reset button :</h3>
+        <input type="button" value="reset" id="reset">
+     </div>
+    <div class="dis">
+        <div>
+      
+    
+    <img id ="opponent_choice" src="">
+    <h2 id= "opponent_score" > OPPONENT SCORE : 0 </h2>
+    </div>
+    
+    
+<div>
+    <div id="choi">
+        <h3>Select your choice : </h3><br>  
+    <div id="choices">
+    <img id = "rock" src="rock.png" alt="an image" class="your_choices">
+    <img id="paper" src="paper.png" alt="an image" class="your_choices">
+    <img id="scissor" src="scissor.png" alt="an image" class="your_choices">
+</div>
+<div>
+    <img id ="your_choice" src="" >
+    
+</div>
+
+    </div>
+</div>
+    <div>
+        <h2 id= "your_score" > YOUR SCORE : 0 </h2>
+    </div>
+</div>
+<script>
+    let ima = document.querySelectorAll('.your_choices')
+    let sc1 = 0
+    let sc2 = 0
+    console.log(sc1 , sc2)
+   let images = Array.from(ima)
+   let resetButton = document.getElementById("reset")
+   resetButton.addEventListener('click' , rese)
+   function rese(){
+    location.reload() ;
+   }
+   console.log(images)
+     images.forEach(e => {
+        e.addEventListener('click' , selectchoice)
+        function selectchoice(){
+            let id1 = document.getElementById(e.id)
+            document.getElementById('your_choice').src = id1.src 
+            let idd = e.id
+            let choice = images[Math.floor(Math.random()*3)]
+            document.getElementById('opponent_choice').src= document.getElementById(choice.id).src
+            let idd1 = choice.id
+            console.log(idd , idd1)
+            if(idd == idd1){
+                sc1 += 1 ;
+                sc2 += 1 ;
+            }
+            else{
+                if(idd == "rock"){
+                    if(idd1 == "paper")
+                    sc2 += 1 ;
+                    else if(idd1 == "scissor")
+                    sc1 += 1 ;
+                }
+                else if(idd == "paper"){
+                    if(idd1 == "rock")
+                    sc1 += 1 ;
+                    else if(idd1 == "scissor")
+                    sc2 += 1 ;
+                }
+                else{
+                    if(idd1 == "paper")
+                    sc1 += 1 ;
+                    else if(idd1 == "rock")
+                    sc2 += 1 ;
+                }
+                
+            }
+            console.log(sc1 , sc2)
+            document.getElementById('your_score').textContent = "YOUR SCORE : " + sc1 ;
+            document.getElementById('opponent_score').textContent = "OPPONENT SCORE : " + sc2 ;
+        }
+
+     })
+
+</script>
+</body>
+</html>
